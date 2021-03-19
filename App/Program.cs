@@ -28,12 +28,14 @@ namespace App
 
                     var key = Console.ReadKey();
 
-                    if (key.Key == System.ConsoleKey.DownArrow)
+                    if (key.Key == System.ConsoleKey.DownArrow
+                        && selectedMenuItem < options.Count - 1)
                     {
                         selectedMenuItem++;
                     }
 
-                    if (key.Key == System.ConsoleKey.UpArrow)
+                    if (key.Key == System.ConsoleKey.UpArrow
+                        && selectedMenuItem > 0)
                     {
                         selectedMenuItem--;
                     }
