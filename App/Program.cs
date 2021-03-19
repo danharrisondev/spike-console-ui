@@ -9,8 +9,6 @@ namespace App
         {
             Console.ResetColor();
 
-            int selectedMenuItem = 0;
-
             int cursorX, cursorY;
             cursorX = Console.CursorLeft;
             cursorY = Console.CursorTop;
@@ -22,6 +20,11 @@ namespace App
 
             string ShowMenu(string prompt, List<string> options)
             {
+                int selectedMenuItem = 0;
+
+                Console.Clear();
+                Console.WriteLine(prompt);
+
                 while(true)
                 {
                     ShowMenuItems(options);
@@ -45,21 +48,21 @@ namespace App
                         return options[selectedMenuItem];
                     }
                 }
-            }
 
-            void ShowMenuItems(List<string> options)
-            {
-                Console.SetCursorPosition(cursorX, cursorY);
-
-                for(int i = 0; i < options.Count; i++)
+                void ShowMenuItems(List<string> options)
                 {
-                    if (i == selectedMenuItem)
-                    {
-                        Console.BackgroundColor = ConsoleColor.Red;
-                    }
+                    Console.SetCursorPosition(cursorX, cursorY);
 
-                    Console.WriteLine(options[i]);
-                    Console.ResetColor();
+                    for(int i = 0; i < options.Count; i++)
+                    {
+                        if (i == selectedMenuItem)
+                        {
+                            Console.BackgroundColor = ConsoleColor.Red;
+                        }
+
+                        Console.WriteLine(options[i]);
+                        Console.ResetColor();
+                    }
                 }
             }
         }
