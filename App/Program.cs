@@ -18,35 +18,22 @@ namespace App
             cursorX = Console.CursorLeft;
             cursorY = Console.CursorTop;
 
-            ShowMenuItems(options);
-
-            var key = Console.ReadKey();
-
-            if (key.Key == System.ConsoleKey.DownArrow)
+            while(true)
             {
-                selectedMenuItem++;
+                ShowMenuItems(options);
+
+                var key = Console.ReadKey();
+
+                if (key.Key == System.ConsoleKey.DownArrow)
+                {
+                    selectedMenuItem++;
+                }
+
+                if (key.Key == System.ConsoleKey.UpArrow)
+                {
+                    selectedMenuItem--;
+                }
             }
-
-            if (key.Key == System.ConsoleKey.UpArrow)
-            {
-                selectedMenuItem--;
-            }
-
-            ShowMenuItems(options);
-
-            key = Console.ReadKey();
-
-            if (key.Key == System.ConsoleKey.DownArrow)
-            {
-                selectedMenuItem++;
-            }
-            
-            if (key.Key == System.ConsoleKey.UpArrow)
-            {
-                selectedMenuItem--;
-            }
-
-            ShowMenuItems(options);
 
             void ShowMenuItems(List<string> options)
             {
