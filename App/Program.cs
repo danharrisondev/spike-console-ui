@@ -25,6 +25,11 @@ namespace App
                 selectedMenuItem++;
             }
 
+            if (key.Key == System.ConsoleKey.UpArrow)
+            {
+                selectedMenuItem--;
+            }
+
             ShowMenuItems();
 
             key = Console.ReadKey();
@@ -32,6 +37,11 @@ namespace App
             if (key.Key == System.ConsoleKey.DownArrow)
             {
                 selectedMenuItem++;
+            }
+            
+            if (key.Key == System.ConsoleKey.UpArrow)
+            {
+                selectedMenuItem--;
             }
 
             ShowMenuItems();
