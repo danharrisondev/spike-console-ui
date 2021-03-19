@@ -16,26 +16,7 @@ namespace App
             cursorX = Console.CursorLeft;
             cursorY = Console.CursorTop;
 
-            if (selectedMenuItem == 1)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-            }
-            Console.WriteLine("Option 1");
-            Console.ResetColor();
-
-            if (selectedMenuItem == 2)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-            }
-            Console.WriteLine("Option 2");
-            Console.ResetColor();
-            
-            if (selectedMenuItem == 3)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-            }
-            Console.WriteLine("Option 3");
-            Console.ResetColor();
+            ShowMenuItems();
 
             var key = Console.ReadKey();
 
@@ -44,28 +25,7 @@ namespace App
                 selectedMenuItem++;
             }
 
-            Console.SetCursorPosition(cursorX, cursorY);
-
-            if (selectedMenuItem == 1)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-            }
-            Console.WriteLine("Option 1");
-            Console.ResetColor();
-
-            if (selectedMenuItem == 2)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-            }
-            Console.WriteLine("Option 2");
-            Console.ResetColor();
-            
-            if (selectedMenuItem == 3)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-            }
-            Console.WriteLine("Option 3");
-            Console.ResetColor();
+            ShowMenuItems();
 
             key = Console.ReadKey();
 
