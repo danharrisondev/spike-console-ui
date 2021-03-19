@@ -8,7 +8,7 @@ namespace App
         {
             Console.ResetColor();
 
-            int selectedMenuItem = 1;
+            int selectedMenuItem = 0;
 
             Console.WriteLine("Here is some text. Choose an option");
 
@@ -50,21 +50,21 @@ namespace App
             {
                 Console.SetCursorPosition(cursorX, cursorY);
 
-                if (selectedMenuItem == 1)
+                if (selectedMenuItem == 0)
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                 }
                 Console.WriteLine("Option 1");
                 Console.ResetColor();
 
-                if (selectedMenuItem == 2)
+                if (selectedMenuItem == 1)
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                 }
                 Console.WriteLine("Option 2");
                 Console.ResetColor();
                 
-                if (selectedMenuItem == 3)
+                if (selectedMenuItem == 2)
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                 }
