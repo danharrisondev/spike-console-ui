@@ -74,28 +74,33 @@ namespace App
                 selectedMenuItem++;
             }
 
-            Console.SetCursorPosition(cursorX, cursorY);
+            ShowMenuItems();
 
-            if (selectedMenuItem == 1)
+            void ShowMenuItems()
             {
-                Console.BackgroundColor = ConsoleColor.Red;
-            }
-            Console.WriteLine("Option 1");
-            Console.ResetColor();
+                Console.SetCursorPosition(cursorX, cursorY);
 
-            if (selectedMenuItem == 2)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
+                if (selectedMenuItem == 1)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                }
+                Console.WriteLine("Option 1");
+                Console.ResetColor();
+
+                if (selectedMenuItem == 2)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                }
+                Console.WriteLine("Option 2");
+                Console.ResetColor();
+                
+                if (selectedMenuItem == 3)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                }
+                Console.WriteLine("Option 3");
+                Console.ResetColor();
             }
-            Console.WriteLine("Option 2");
-            Console.ResetColor();
-            
-            if (selectedMenuItem == 3)
-            {
-                Console.BackgroundColor = ConsoleColor.Red;
-            }
-            Console.WriteLine("Option 3");
-            Console.ResetColor();
         }
     }
 }
