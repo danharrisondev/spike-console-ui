@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace App
 {
@@ -11,12 +12,13 @@ namespace App
             int selectedMenuItem = 0;
 
             Console.WriteLine("Here is some text. Choose an option");
+            var options = new List<string> {"Option 1", "Option 2", "Option 3"};
 
             int cursorX, cursorY;
             cursorX = Console.CursorLeft;
             cursorY = Console.CursorTop;
 
-            ShowMenuItems();
+            ShowMenuItems(options);
 
             var key = Console.ReadKey();
 
@@ -30,7 +32,7 @@ namespace App
                 selectedMenuItem--;
             }
 
-            ShowMenuItems();
+            ShowMenuItems(options);
 
             key = Console.ReadKey();
 
@@ -44,32 +46,22 @@ namespace App
                 selectedMenuItem--;
             }
 
-            ShowMenuItems();
+            ShowMenuItems(options);
 
-            void ShowMenuItems()
+            void ShowMenuItems(List<string> options)
             {
                 Console.SetCursorPosition(cursorX, cursorY);
 
-                if (selectedMenuItem == 0)
+                for(int i = 0; i < options.Count; i++)
                 {
-                    Console.BackgroundColor = ConsoleColor.Red;
-                }
-                Console.WriteLine("Option 1");
-                Console.ResetColor();
+                    if (i == selectedMenuItem)
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                    }
 
-                if (selectedMenuItem == 1)
-                {
-                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine(options[i]);
+                    Console.ResetColor();
                 }
-                Console.WriteLine("Option 2");
-                Console.ResetColor();
-                
-                if (selectedMenuItem == 2)
-                {
-                    Console.BackgroundColor = ConsoleColor.Red;
-                }
-                Console.WriteLine("Option 3");
-                Console.ResetColor();
             }
         }
     }
