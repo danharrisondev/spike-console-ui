@@ -1,8 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace App
 {
+    class DialogJson
+    {
+        public SpeakerNode Dialog { get; set; }
+    }
+
+    class SpeakerNode
+    {
+        public string SpeakerText { get; set; }
+        public List<Response> Responses { get; set; }
+    }
+
+    class Response
+    {
+        public SpeakerNode Next { get; set; }
+        public string ResponseText { get; set; }
+    }
+
     class Program
     {
         static void Main(string[] args)
@@ -13,51 +33,28 @@ namespace App
             cursorX = Console.CursorLeft;
             cursorY = Console.CursorTop;
 
-            var answer = ShowMenu("Hey, what can I do for you?",
-                DialogOptions.List(
-                    "What can you tell me about this part of the world?",
-                    "What do you sell?",
-                    "Who is that man over there?"
-                ));
+            var dialog = System.Text.Json.JsonSerializer.Deserialize<DialogJson>(
+                Encoding.ASCII.GetBytes(File.ReadAllText("./SampleDialog.json")))
+                .Dialog;
 
-            if (answer.StartsWith("What can you tell me"))
+            bool endOfConversation = false;
+            while(!endOfConversation)
             {
-                answer = ShowMenu(
-                    "Well, not much happens around here. We're a quiet village. We keep to ourselves. But recently strange things have been happening, things we cannot explain..",
-                    DialogOptions.List(
-                        "Like what?",
-                        "Is somebody investigating?"
-                    ));
+                var answer = ShowMenu(dialog.SpeakerText,
+                    dialog.Responses.Select(x => x.ResponseText).ToList());
 
-                if (answer.StartsWith("Like what?"))
+                if (answer == DialogOptions.EndConversationToken)
                 {
-                    answer = ShowMenu("Well, ...", DialogOptions.None());
-                } else if (answer.StartsWith("Is somebody investigating?"))
-                {
-                    answer = ShowMenu("When we started carrying out investigations the strange activities stopped. We suspect there's an insider.",
-                        DialogOptions.List(
-                            "Maybe I can help out. A new, unknown face. I'll keep a look out."
-                        ));
+                    endOfConversation = true;
+                    break;
                 }
-
-            } else if (answer.StartsWith("What do you sell"))
-            {
-                answer = ShowMenu(
-                    "I sell trinkets, odds and ends and adventuring equipment.",
-                    DialogOptions.List(
-                        "Show me your wares."
-                    ));
+                
+                dialog = dialog.Responses.Single(x => x.ResponseText == answer).Next;
+                if (dialog == null)
+                {
+                    throw new NullReferenceException("Conversation terminated prematurely. No continuation found.");
+                }
             }
-            else if (answer.StartsWith("Who is that man"))
-            {
-                answer = ShowMenu(
-                    "That man goes by the name of Strider. He's a ranger. Legends say he was descended from the ancient kings of men.",
-                    DialogOptions.List(
-                        "Wow.. What is he doing here then?"
-                    ));
-            }
-
-            Console.WriteLine($"You chose: {answer}");
 
             string ShowMenu(string prompt, List<string> options)
             {
@@ -98,7 +95,7 @@ namespace App
                     {
                         if (i == selectedMenuItem)
                         {
-                            Console.BackgroundColor = ConsoleColor.Red;
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                         }
 
                         Console.WriteLine(options[i]);
@@ -110,18 +107,20 @@ namespace App
 
         public sealed class DialogOptions
         {
+            public const string EndConversationToken = "[End Conversation]";
+
             public static List<string> List(params string[] options)
             {
                 var list = new List<string>();
                 if (options.Length > 0)
                     list.AddRange(options);
-                list.Add("[End Conversation]");
+                list.Add(EndConversationToken);
                 return list;
             }
 
             public static List<string> None()
             {
-                return new List<string> { "[End Conversation]" };
+                return new List<string> { EndConversationToken };
             }
         }
     }

@@ -1,0 +1,33 @@
+{
+    "Dialog": {
+        "SpeakerText": "Howdy stranger. What brings you to these parts?",
+        "Responses": [
+            {
+                "ResponseText": "Hey, I'm looking for work, have you heard of anything in the area?"
+            },
+            {
+                "ResponseText": "I need a place to stay for the night"
+            },
+            {
+                "ResponseText": "What can you tell me about the area?",
+                "Next": {
+                    "SpeakerText": "Well, the area is quite big, what do you want to know?",
+                    "Responses": [
+                        {
+                            "ResponseText": "Where can I hunt?"
+                        },
+                        {
+                            "ResponseText": "How do I get to the nearest village?"
+                        },
+                        {
+                            "ResponseText": "Are there any lakes nearby?"
+                        }
+                    ]
+                }
+            },
+            {
+                "ResponseText": "[End Conversation]"
+            }
+        ]
+    }
+}
