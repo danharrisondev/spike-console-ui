@@ -13,8 +13,54 @@ namespace App
             cursorX = Console.CursorLeft;
             cursorY = Console.CursorTop;
 
-            var answer = ShowMenu("Here is some text. Choose an option",
-                new List<string> { "Option 1", "Option 2", "Option 3" });
+            var answer = ShowMenu("Hey, what can I do for you?",
+                new List<string> {
+                    "What can you tell me about this part of the world?",
+                    "What do you sell?",
+                    "Who is that man over there?",
+                    "[End Conversation]"
+                });
+
+            if (answer.StartsWith("What can you tell me"))
+            {
+                answer = ShowMenu(
+                    "Well, not much happens around here. We're a quiet village. We keep to ourselves. But recently strange things have been happening, things we cannot explain..",
+                    new List<string> {
+                        "Like what?",
+                        "Is somebody investigating?",
+                        "[End Conversation]"
+                    });
+
+                if (answer.StartsWith("Like what?"))
+                {
+                    answer = ShowMenu("Well, ...",
+                        new List<string> { "[End Conversation] "});
+                } else if (answer.StartsWith("Is somebody investigating?"))
+                {
+                    answer = ShowMenu("When we started carrying out investigations the strange activities stopped. We suspect there's an insider.",
+                        new List<string> {
+                            "Maybe I can help out. A new, unknown face. I'll keep a look out.",
+                            "[End Conversation]"
+                        });
+                }
+
+            } else if (answer.StartsWith("What do you sell"))
+            {
+                answer = ShowMenu(
+                    "I sell trinkets, odds and ends and adventuring equipment.",
+                    new List<string> {
+                        "Show me your wares.",
+                        "[End Conversation]"});
+            }
+            else if (answer.StartsWith("Who is that man"))
+            {
+                answer = ShowMenu(
+                    "That man goes by the name of Strider. He's a ranger. Legends say he was descended from the ancient kings of men.",
+                    new List<string> {
+                        "Wow.. What is he doing here then?",
+                        "[End Conversation]"
+                    });
+            }
 
             Console.WriteLine($"You chose: {answer}");
 
