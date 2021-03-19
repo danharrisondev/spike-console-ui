@@ -18,6 +18,8 @@ namespace App
             var answer = ShowMenu("Here is some text. Choose an option",
                 new List<string> { "Option 1", "Option 2", "Option 3" });
 
+            Console.WriteLine($"You chose: {answer}");
+
             string ShowMenu(string prompt, List<string> options)
             {
                 while(true)
