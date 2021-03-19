@@ -64,7 +64,7 @@ namespace App
                 int selectedMenuItem = 0;
 
                 Console.Clear();
-                Console.WriteLine(prompt);
+                Console.WriteLine($"> {prompt}");
 
                 while(true)
                 {
